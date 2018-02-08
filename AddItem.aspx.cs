@@ -6,10 +6,13 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Microsoft.ApplicationInsights;
+
 
 public partial class AddItem : System.Web.UI.Page
 {
     object username;
+    private TelemetryClient telemetry = new TelemetryClient();
     protected void Page_Load(object sender, EventArgs e)
     {
         username = Session["username"];
@@ -33,9 +36,10 @@ public partial class AddItem : System.Web.UI.Page
         {
             cmd.ExecuteNonQuery();
         }
-        catch (SqlException)
+        catch (SqlException ex)
         {
             Response.Write("<script>onload = function(){error_msg.innerHTML = 'Item addition was unsuccessful';}</script>");
+            telemetry.TrackException(ex);
             return;
         }
         Response.Write("<script>onload = function(){success_msg.innerHTML = 'Item added successfully, redirecting...';setTimeout('location=\"User.aspx\"', 2000);}</script>");

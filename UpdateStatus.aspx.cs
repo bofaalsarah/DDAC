@@ -6,9 +6,12 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Microsoft.ApplicationInsights;
+
 
 public partial class UpdateStatus : System.Web.UI.Page
 {
+    private TelemetryClient telemetry = new TelemetryClient();
     protected void Page_Load(object sender, EventArgs e)
     {
         object username = Session["username"];
@@ -29,9 +32,10 @@ public partial class UpdateStatus : System.Web.UI.Page
         {
             cmd.ExecuteNonQuery();
         }
-        catch (SqlException)
+        catch (SqlException ex)
         {
             Response.Write("<script>onload = function(){error_msg.innerHTML = 'Item update was unsuccessful';}</script>");
+            telemetry.TrackException(ex);
             return;
         }
         Response.Write("<script>onload = function(){success_msg.innerHTML = 'Item updated successfully, redirecting...';setTimeout('location=\"CheckStatus.aspx?cid=" + container_id.Text + "\"', 2000);}</script>");
