@@ -12,6 +12,12 @@ public partial class CheckStatus : System.Web.UI.Page
     object username;
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (HttpContext.Current.Request.IsSecureConnection.Equals(false) && HttpContext.Current.Request.IsLocal.Equals(false))
+        {
+            Response.Redirect("https://" + Request.ServerVariables["HTTP_HOST"]
+        + HttpContext.Current.Request.RawUrl);
+        }
+
         username = Session["username"];
         if(username == null)
             Response.Redirect("Signin.aspx");

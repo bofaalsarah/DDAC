@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-	<title>Container Tracking System</title>
+	<title>Maersk Line Container Management System</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
 	<link rel="stylesheet" type="text/css" href="style.css"/>
 </head>
@@ -13,7 +13,7 @@
 	<nav class="navbar navbar-default">
 	  <div class="container-fluid">
 	    <div class="navbar-header">
-	      <a class="navbar-brand" href="Default.aspx">Container Tracking System</a>
+	      <a class="navbar-brand" href="Default.aspx">Maersk Line Container Management System</a>
 	    </div>
 	    <ul class="nav navbar-nav" style="float: right;">
 		    <li><a href="Default.aspx">Home</a></li>
@@ -35,7 +35,7 @@
 					<div class="col-sm-12">
 						<div class="form-group">
 							<label>Container Id</label>
-                            <asp:TextBox ID="container_id" class="form-control" placeholder="Enter Container Id Here.." runat="server"></asp:TextBox>
+                            <asp:TextBox ID="container_id" class="form-control" placeholder="Enter Container Id Here.." required runat="server"></asp:TextBox>
 						</div>	
 						<div class="form-group">
 							<label>New Status</label>

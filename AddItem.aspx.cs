@@ -24,6 +24,13 @@ public partial class AddItem : System.Web.UI.Page
         }
 
         senderName.Text = username.ToString();
+        senderName.Attributes.Add("readonly", "readonly");
+
+        if (HttpContext.Current.Request.IsSecureConnection.Equals(false) && HttpContext.Current.Request.IsLocal.Equals(false))
+        {
+            Response.Redirect("https://" + Request.ServerVariables["HTTP_HOST"]
+        + HttpContext.Current.Request.RawUrl);
+        }
     }
 
     protected void submit_Click(object sender, EventArgs e)

@@ -11,10 +11,17 @@ using Microsoft.ApplicationInsights;
 public partial class Signup : System.Web.UI.Page
 {
     private TelemetryClient telemetry = new TelemetryClient();
+
+
     
     protected void Page_Load(object sender, EventArgs e)
     {
         telemetry.TrackPageView("Signup");
+        if (HttpContext.Current.Request.IsSecureConnection.Equals(false) && HttpContext.Current.Request.IsLocal.Equals(false))
+        {
+            Response.Redirect("https://" + Request.ServerVariables["HTTP_HOST"]
+        + HttpContext.Current.Request.RawUrl);
+        }
     }
 
     protected void Button1_Click(object sender, EventArgs e)
